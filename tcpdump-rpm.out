@@ -1,0 +1,24 @@
+Name        : tcpdump
+Epoch       : 14
+Version     : 4.99.5
+Release     : 1.red80
+Architecture: x86_64
+Install Date: Tue 10 Nov 2026 07:34:21 PM MSK
+Group       : Unspecified
+Size        : 1468823
+License     : BSD-3-Clause
+Signature   : RSA/SHA256, Fri 01 Aug 2025 06:43:35 PM MSK, Key ID 0b57f167f8ac18ee
+Source RPM  : tcpdump-4.99.5-1.red80.src.rpm
+Build Date  : Wed 30 Jul 2025 01:29:14 PM MSK
+Build Host  : stapel80.red-soft.ru
+Packager    : RED SOFT
+Vendor      : redsoft
+URL         : http://www.tcpdump.org
+Summary     : A network traffic monitoring tool
+Description :
+Tcpdump is a command-line tool for monitoring network traffic.
+Tcpdump can capture and display the packet headers on a particular
+network interface or on all interfaces.  Tcpdump can display all of
+the packet headers, or just the ones that match particular criteria.
+
+Install tcpdump if you need a program to monitor network traffic.

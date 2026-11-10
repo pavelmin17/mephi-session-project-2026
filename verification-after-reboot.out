@@ -1,0 +1,72 @@
+enabled
+active
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+/usr/sbin/tcpdump cap_net_admin,cap_net_raw=eip
+# file: /data/mephi-2026
+# owner: root
+# group: mephi-dev
+# flags: -s-
+user::rwx
+group::rwx
+group:curators:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:curators:r-x
+default:mask::rwx
+default:other::---
+
+# file: /data/mephi-2026/verification
+# owner: user1
+# group: mephi-dev
+# flags: -s-
+user::rwx
+group::rwx
+group:curators:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:curators:r-x
+default:mask::rwx
+default:other::---
+
+# file: /data/mephi-2026/verification/user1.txt
+# owner: user1
+# group: mephi-dev
+user::rw-
+group::rwx	#effective:rw-
+group:curators:r-x	#effective:r--
+mask::rw-
+other::---
+
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.072 ms
+
+--- 127.0.0.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.072/0.072/0.072/0.000 ms
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on lo, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+19:44:12.469028 IP 127.0.0.1 > 127.0.0.1: ICMP echo request, id 1, seq 1, length 64
+1 packet captured
+4 packets received by filter
+0 packets dropped by kernel
+PAM login root: allowed
+PAM login user1: allowed
+PAM login user2: allowed
+PAM login user3: allowed
+PAM login curator1: denied
+PAM login curator2: denied
+PAM sshd root: allowed
+PAM sshd user1: allowed
+PAM sshd user2: allowed
+PAM sshd user3: allowed
+PAM sshd curator1: allowed
+PAM sshd curator2: allowed
+Password quality: 11 characters rejected; strong 24 characters accepted
+connection.id:                          ens18
+ipv4.method:                            auto
+ALL CHECKS PASSED

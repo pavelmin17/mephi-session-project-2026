@@ -1,0 +1,7 @@
+ID     | Command line             | Date and time    | Action(s)      | Altered
+-------------------------------------------------------------------------------
+     5 | -y install nginx libcap- | 2026-11-10 19:32 | Install        |   23 EE
+     4 | -y upgrade               | 2026-11-10 19:29 | I, O, U        |  182 EE
+     3 | autoremove -y --setopt=m | 2026-11-10 18:13 | Removed        |    4  <
+     2 | remove -y --setopt=metad | 2026-11-10 18:12 | Removed        |    2 >E
+     1 |                          | 2026-11-10 18:03 | Install        |  561 EE

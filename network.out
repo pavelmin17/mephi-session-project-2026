@@ -1,0 +1,6 @@
+connection.id:                          ens18
+ipv4.method:                            auto
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens18            UP             10.99.0.15/16 fe80::be24:11ff:fe58:800c/64 
+default via 10.99.0.1 dev ens18 proto dhcp src 10.99.0.15 metric 100 
+10.99.0.0/16 dev ens18 proto kernel scope link src 10.99.0.15 metric 100 

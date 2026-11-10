@@ -1,0 +1,455 @@
+    1  ip -4 -brief address; systemctl status qemu-guest-agent --no-pager; cat /root/ks-post.log; ls -l /root/.ssh/authorized_keys
+    2  tail -10 /root/configure.out; test ! -f /root/configure.exit || cat /root/configure.exit; systemctl is-active sshd
+    3  date; chage -l root; chage -d "$(date +%F)" root; chage -l root; tail -14 /root/configure.out; test ! -f /root/configure.exit || cat /root/configure.exit
+    4  uname -r; ip -4 -brief address; systemctl is-active sshd; ls -lh /boot/initramfs*; lsinitrd /boot/initramfs-6.12.113-1.red80.x86_64.img | grep -E "virtio_scsi|virtio_pci|virtio_blk|persistent-storage.rules"
+    5  clear
+    6  hostname
+    7  uname -r
+    8  curl http://localhost/
+    9  getenforce
+   10  history -w
+   11  clear
+   12  hostname
+   13  uname -r
+   14  curl http://localhost/
+   15  getenforce
+   16  history -w
+   17  exit
+   18  ++ id -u
+   19  + test 0 = 0
+   20  + grep -qi 'RED OS' /etc/os-release
+   21  + hostnamectl set-hostname mephi-2026.domain.local
+   22  + dnf -y upgrade
+   23  + dnf -y install nginx libcap-ng-utils dnf-plugins-core acl policycoreutils-python-utils libcap libpcap parted qemu-guest-agent openssl
+   24  + cd /tmp
+   25  + dnf download --destdir /tmp tcpdump
+   26  + rpm -Uvh --replacepkgs /tmp/tcpdump-4.99.5-1.red80.i686.rpm /tmp/tcpdump-4.99.5-1.red80.x86_64.rpm
+   27  ++ id -u
+   28  + test 0 = 0
+   29  + grep -qi 'RED OS' /etc/os-release
+   30  + hostnamectl set-hostname mephi-2026.domain.local
+   31  + dnf -y upgrade
+   32  + dnf -y install nginx libcap-ng-utils dnf-plugins-core acl policycoreutils-python-utils libcap libpcap parted qemu-guest-agent openssl
+   33  + cd /tmp
+   34  + dnf download --arch=x86_64 --destdir /tmp tcpdump
+   35  + rpm -Uvh --replacepkgs /tmp/tcpdump-4.99.5-1.red80.x86_64.rpm
+   36  + blkid -L MEPHI_WEB
+   37  ++ lsblk -dn -o SIZE /dev/sdb
+   38  + test '  8G' = 8G
+   39  ++ id -u
+   40  + test 0 = 0
+   41  + grep -qi 'RED OS' /etc/os-release
+   42  + hostnamectl set-hostname mephi-2026.domain.local
+   43  + dnf -y upgrade
+   44  + dnf -y install nginx libcap-ng-utils dnf-plugins-core acl policycoreutils-python-utils libcap libpcap parted qemu-guest-agent openssl
+   45  + cd /tmp
+   46  + dnf download --arch=x86_64 --destdir /tmp tcpdump
+   47  + rpm -Uvh --replacepkgs /tmp/tcpdump-4.99.5-1.red80.x86_64.rpm
+   48  + blkid -L MEPHI_WEB
+   49  ++ blockdev --getsize64 /dev/sdb
+   50  + test 8589934592 -eq 8589934592
+   51  ++ lsblk -nr -o NAME /dev/sdb
+   52  ++ wc -l
+   53  + test 1 -eq 1
+   54  ++ wipefs -n /dev/sdb
+   55  + test -z ''
+   56  + parted -s /dev/sdb mklabel gpt
+   57  + parted -s /dev/sdb mkpart primary ext4 1MiB 100%
+   58  + udevadm settle
+   59  + mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+   60  ++ blkid -L MEPHI_WEB
+   61  + test /dev/sdb1 = /dev/sdb1
+   62  + mkdir -p /mephi-web
+   63  + grep -q '^LABEL=MEPHI_WEB[[:space:]]' /etc/fstab
+   64  + printf '%s\n' 'LABEL=MEPHI_WEB /mephi-web ext4 defaults 0 2'
+   65  + systemctl daemon-reload
+   66  + mountpoint -q /mephi-web
+   67  + mount /mephi-web
+   68  + getent group mephi-dev
+   69  + groupadd mephi-dev
+   70  + getent group curators
+   71  + groupadd -g 4444 curators
+   72  ++ getent group curators
+   73  ++ cut -d: -f3
+   74  + test 4444 = 4444
+   75  + for entry in user1:5501 user2:5502 user3:5503
+   76  + user=user1
+   77  + uid=5501
+   78  + id user1
+   79  + useradd -m -u 5501 -G mephi-dev -s /bin/bash user1
+   80  ++ id -u user1
+   81  + test 5501 = 5501
+   82  + usermod -aG mephi-dev user1
+   83  + for entry in user1:5501 user2:5502 user3:5503
+   84  + user=user2
+   85  + uid=5502
+   86  + id user2
+   87  + useradd -m -u 5502 -G mephi-dev -s /bin/bash user2
+   88  ++ id -u user2
+   89  + test 5502 = 5502
+   90  + usermod -aG mephi-dev user2
+   91  + for entry in user1:5501 user2:5502 user3:5503
+   92  + user=user3
+   93  + uid=5503
+   94  + id user3
+   95  + useradd -m -u 5503 -G mephi-dev -s /bin/bash user3
+   96  ++ id -u user3
+   97  + test 5503 = 5503
+   98  + usermod -aG mephi-dev user3
+   99  + for user in curator1 curator2
+  100  + id curator1
+  101  + useradd -m -g curators -s /bin/bash curator1
+  102  + usermod -aG curators curator1
+  103  + for user in curator1 curator2
+  104  + id curator2
+  105  + useradd -m -g curators -s /bin/bash curator2
+  106  + usermod -aG curators curator2
+  107  + install -d -m 700 /root/mephi-private
+  108  + set +x
+  109  + mkdir -p /data/mephi-2026
+  110  + chown root:mephi-dev /data/mephi-2026
+  111  + chmod 2770 /data/mephi-2026
+  112  + setfacl -m u::rwx,g::rwx,g:curators:r-x,m::rwx,o::--- /data/mephi-2026
+  113  + setfacl -d -m u::rwx,g::rwx,g:curators:r-x,m::rwx,o::--- /data/mephi-2026
+  114  + chmod u-s /usr/sbin/tcpdump
+  115  + setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+  116  + sed -i 's/^SELINUX=.*/SELINUX=enforcing/' /etc/selinux/config
+  117  ++ getenforce
+  118  + test Enforcing '!=' Disabled
+  119  + setenforce 1
+  120  + semanage fcontext -a -t httpd_sys_content_t '/mephi-web(/.*)?'
+  121  + printf '%s\n' 'Hello from Student: М265268'
+  122  + chmod 755 /mephi-web
+  123  + chmod 644 /mephi-web/index.html
+  124  + restorecon -RFv /mephi-web
+  125  + cp -a /etc/nginx/nginx.conf /root/mephi-private/nginx.conf.before
+  126  + cat
+  127  + mkdir -p /etc/systemd/system/nginx.service.d
+  128  + cat
+  129  + nginx -t
+  130  + systemctl daemon-reload
+  131  + systemctl enable --now nginx
+  132  + systemctl is-active --quiet firewalld
+  133  + printf '%s\n' curator1 curator2
+  134  + chmod 644 /etc/security/mephi-console-denied
+  135  + grep -q file=/etc/security/mephi-console-denied /etc/pam.d/login
+  136  + sed -i '1a account required pam_listfile.so item=user sense=deny file=/etc/security/mephi-console-denied onerr=fail' /etc/pam.d/login
+  137  + sed -i 's/^[[:space:]]*PASS_MAX_DAYS[[:space:]].*/PASS_MAX_DAYS   90/' /etc/login.defs
+  138  + sed -i -E '/^[[:space:]]*#?[[:space:]]*(minlen|dcredit|ucredit|lcredit|ocredit|enforcing|enforce_for_root)[[:space:]=]/d' /etc/security/pwquality.conf
+  139  + cat
+  140  + grep -q pam_pwquality.so /etc/pam.d/system-auth
+  141  + for user in root user1 user2 user3 curator1 curator2
+  142  + chage -M 90 root
+  143  + for user in root user1 user2 user3 curator1 curator2
+  144  + chage -M 90 user1
+  145  + for user in root user1 user2 user3 curator1 curator2
+  146  + chage -M 90 user2
+  147  + for user in root user1 user2 user3 curator1 curator2
+  148  + chage -M 90 user3
+  149  + for user in root user1 user2 user3 curator1 curator2
+  150  + chage -M 90 curator1
+  151  + for user in root user1 user2 user3 curator1 curator2
+  152  + chage -M 90 curator2
+  153  + systemctl set-default multi-user.target
+  154  + systemctl enable sshd qemu-guest-agent
+  155  + curl -fsS http://localhost/
+  156  + getenforce
+  157  + findmnt /mephi-web
+  158  + printf '%s\n' 'Configuration complete'
+  159  ++ hostname
+  160  + test mephi-2026.domain.local = mephi-2026.domain.local
+  161  ++ systemctl get-default
+  162  + test multi-user.target = multi-user.target
+  163  ++ getenforce
+  164  + test Enforcing = Enforcing
+  165  + systemctl is-enabled nginx
+  166  + systemctl is-active nginx
+  167  ++ findmnt -n -o FSTYPE /mephi-web
+  168  + test ext4 = ext4
+  169  ++ findmnt -n -o SOURCE /mephi-web
+  170  + test /dev/sdb1 = /dev/sdb1
+  171  ++ blkid -s LABEL -o value /dev/sdb1
+  172  + test MEPHI_WEB = MEPHI_WEB
+  173  ++ curl -fsS http://localhost/
+  174  + test 'Hello from Student: М265268' = 'Hello from Student: М265268'
+  175  + nginx -t
+  176  + getcap /usr/sbin/tcpdump
+  177  + test '!' -u /usr/sbin/tcpdump
+  178  ++ getent group curators
+  179  ++ cut -d: -f3
+  180  + test 4444 = 4444
+  181  + for entry in user1:5501 user2:5502 user3:5503
+  182  ++ id -u user1
+  183  + test 5501 = 5501
+  184  + for entry in user1:5501 user2:5502 user3:5503
+  185  ++ id -u user2
+  186  + test 5502 = 5502
+  187  + for entry in user1:5501 user2:5502 user3:5503
+  188  ++ id -u user3
+  189  + test 5503 = 5503
+  190  + work=/data/mephi-2026/verification
+  191  + runuser -u user1 -- mkdir /data/mephi-2026/verification
+  192  + for user in user1 user2 user3
+  193  + runuser -u user1 -- sh -c 'umask 0777; printf "%s\n" "$1" > "$2/$1.txt"' sh user1 /data/mephi-2026/verification
+  194  + for user in user1 user2 user3
+  195  + runuser -u user2 -- sh -c 'umask 0777; printf "%s\n" "$1" > "$2/$1.txt"' sh user2 /data/mephi-2026/verification
+  196  + for user in user1 user2 user3
+  197  + runuser -u user3 -- sh -c 'umask 0777; printf "%s\n" "$1" > "$2/$1.txt"' sh user3 /data/mephi-2026/verification
+  198  + for user in user1 user2 user3
+  199  + for file in "$work"/*.txt
+  200  + runuser -u user1 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user1 /data/mephi-2026/verification/user1.txt
+  201  + for file in "$work"/*.txt
+  202  + runuser -u user1 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user1 /data/mephi-2026/verification/user2.txt
+  203  + for file in "$work"/*.txt
+  204  + runuser -u user1 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user1 /data/mephi-2026/verification/user3.txt
+  205  + for user in user1 user2 user3
+  206  + for file in "$work"/*.txt
+  207  + runuser -u user2 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user2 /data/mephi-2026/verification/user1.txt
+  208  + for file in "$work"/*.txt
+  209  + runuser -u user2 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user2 /data/mephi-2026/verification/user2.txt
+  210  + for file in "$work"/*.txt
+  211  + runuser -u user2 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user2 /data/mephi-2026/verification/user3.txt
+  212  + for user in user1 user2 user3
+  213  + for file in "$work"/*.txt
+  214  + runuser -u user3 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user3 /data/mephi-2026/verification/user1.txt
+  215  + for file in "$work"/*.txt
+  216  + runuser -u user3 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user3 /data/mephi-2026/verification/user2.txt
+  217  + for file in "$work"/*.txt
+  218  + runuser -u user3 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user3 /data/mephi-2026/verification/user3.txt
+  219  + for user in curator1 curator2
+  220  + for file in "$work"/*.txt
+  221  + runuser -u curator1 -- cat /data/mephi-2026/verification/user1.txt
+  222  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification/user1.txt
+  223  + for file in "$work"/*.txt
+  224  + runuser -u curator1 -- cat /data/mephi-2026/verification/user2.txt
+  225  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification/user2.txt
+  226  + for file in "$work"/*.txt
+  227  + runuser -u curator1 -- cat /data/mephi-2026/verification/user3.txt
+  228  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification/user3.txt
+  229  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification
+  230  + for user in curator1 curator2
+  231  + for file in "$work"/*.txt
+  232  + runuser -u curator2 -- cat /data/mephi-2026/verification/user1.txt
+  233  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification/user1.txt
+  234  + for file in "$work"/*.txt
+  235  + runuser -u curator2 -- cat /data/mephi-2026/verification/user2.txt
+  236  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification/user2.txt
+  237  + for file in "$work"/*.txt
+  238  + runuser -u curator2 -- cat /data/mephi-2026/verification/user3.txt
+  239  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification/user3.txt
+  240  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification
+  241  + runuser -u nobody -- test '!' -r /data/mephi-2026/verification
+  242  + runuser -u nobody -- test '!' -x /data/mephi-2026/verification
+  243  + getfacl -p /data/mephi-2026 /data/mephi-2026/verification /data/mephi-2026/verification/user1.txt
+  244  + rm -r /data/mephi-2026/verification
+  245  + capture=30341
+  246  + sleep 1
+  247  + timeout 12 runuser -u user1 -- tcpdump -i lo -nn -c 1 icmp
+  248  + ping -c 1 127.0.0.1
+  249  + wait 30341
+  250  + cat /root/tcpdump-user1.out
+  251  + python3 /root/verify-pam.py
+  252  + for user in root user1 user2 user3 curator1 curator2
+  253  ++ getent shadow root
+  254  ++ cut -d: -f5
+  255  + test 90 = 90
+  256  + for user in root user1 user2 user3 curator1 curator2
+  257  ++ getent shadow user1
+  258  ++ cut -d: -f5
+  259  + test 90 = 90
+  260  + for user in root user1 user2 user3 curator1 curator2
+  261  ++ getent shadow user2
+  262  ++ cut -d: -f5
+  263  + test 90 = 90
+  264  + for user in root user1 user2 user3 curator1 curator2
+  265  ++ getent shadow user3
+  266  ++ cut -d: -f5
+  267  + test 90 = 90
+  268  + for user in root user1 user2 user3 curator1 curator2
+  269  ++ getent shadow curator1
+  270  ++ cut -d: -f5
+  271  + test 90 = 90
+  272  + for user in root user1 user2 user3 curator1 curator2
+  273  ++ getent shadow curator2
+  274  ++ cut -d: -f5
+  275  + test 90 = 90
+  276  ++ nmcli -g GENERAL.CONNECTION device show ens18
+  277  + nmcli -f connection.id,ipv4.method connection show ens18
+  278  +++ nmcli -g GENERAL.CONNECTION device show ens18
+  279  ++ nmcli -g ipv4.method connection show ens18
+  280  + test auto = auto
+  281  + printf '%s\n' 'ALL CHECKS PASSED'
+  282  + cat /proc/sys/kernel/random/boot_id
+  283  + systemctl reboot
+  284  + cat
+  285  + cp -a /boot/initramfs-6.12.113-1.red80.x86_64.img /root/mephi-private/initramfs-6.12.113.before.img
+  286  + dracut --force --no-hostonly /boot/initramfs-6.12.113-1.red80.x86_64.img 6.12.113-1.red80.x86_64
+  287  + ls -lh /boot/initramfs-6.12.113-1.red80.x86_64.img
+  288  + lsinitrd /boot/initramfs-6.12.113-1.red80.x86_64.img
+  289  + grep -E 'virtio_scsi|virtio_blk|virtio_console'
+  290  + grubby --set-default /boot/vmlinuz-6.12.113-1.red80.x86_64
+  291  The default is /boot/loader/entries/6fcbeb0acc44489797101abe012ccdaa-6.12.113-1.red80.x86_64.conf with index 0 and kernel /boot/vmlinuz-6.12.113-1.red80.x86_64
+  292  + systemctl reboot
+  293  ++ hostname
+  294  + test mephi-2026.domain.local = mephi-2026.domain.local
+  295  ++ systemctl get-default
+  296  + test multi-user.target = multi-user.target
+  297  ++ getenforce
+  298  + test Enforcing = Enforcing
+  299  + systemctl is-enabled nginx
+  300  + systemctl is-active nginx
+  301  ++ findmnt -n -o FSTYPE /mephi-web
+  302  + test ext4 = ext4
+  303  ++ findmnt -n -o SOURCE /mephi-web
+  304  + test /dev/sdb1 = /dev/sdb1
+  305  ++ blkid -s LABEL -o value /dev/sdb1
+  306  + test MEPHI_WEB = MEPHI_WEB
+  307  ++ curl -fsS http://localhost/
+  308  + test 'Hello from Student: М265268' = 'Hello from Student: М265268'
+  309  + nginx -t
+  310  + getcap /usr/sbin/tcpdump
+  311  + test '!' -u /usr/sbin/tcpdump
+  312  ++ getent group curators
+  313  ++ cut -d: -f3
+  314  + test 4444 = 4444
+  315  + for entry in user1:5501 user2:5502 user3:5503
+  316  ++ id -u user1
+  317  + test 5501 = 5501
+  318  + for entry in user1:5501 user2:5502 user3:5503
+  319  ++ id -u user2
+  320  + test 5502 = 5502
+  321  + for entry in user1:5501 user2:5502 user3:5503
+  322  ++ id -u user3
+  323  + test 5503 = 5503
+  324  + work=/data/mephi-2026/verification
+  325  + runuser -u user1 -- mkdir /data/mephi-2026/verification
+  326  + for user in user1 user2 user3
+  327  + runuser -u user1 -- sh -c 'umask 0777; printf "%s\n" "$1" > "$2/$1.txt"' sh user1 /data/mephi-2026/verification
+  328  + for user in user1 user2 user3
+  329  + runuser -u user2 -- sh -c 'umask 0777; printf "%s\n" "$1" > "$2/$1.txt"' sh user2 /data/mephi-2026/verification
+  330  + for user in user1 user2 user3
+  331  + runuser -u user3 -- sh -c 'umask 0777; printf "%s\n" "$1" > "$2/$1.txt"' sh user3 /data/mephi-2026/verification
+  332  + for user in user1 user2 user3
+  333  + for file in "$work"/*.txt
+  334  + runuser -u user1 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user1 /data/mephi-2026/verification/user1.txt
+  335  + for file in "$work"/*.txt
+  336  + runuser -u user1 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user1 /data/mephi-2026/verification/user2.txt
+  337  + for file in "$work"/*.txt
+  338  + runuser -u user1 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user1 /data/mephi-2026/verification/user3.txt
+  339  + for user in user1 user2 user3
+  340  + for file in "$work"/*.txt
+  341  + runuser -u user2 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user2 /data/mephi-2026/verification/user1.txt
+  342  + for file in "$work"/*.txt
+  343  + runuser -u user2 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user2 /data/mephi-2026/verification/user2.txt
+  344  + for file in "$work"/*.txt
+  345  + runuser -u user2 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user2 /data/mephi-2026/verification/user3.txt
+  346  + for user in user1 user2 user3
+  347  + for file in "$work"/*.txt
+  348  + runuser -u user3 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user3 /data/mephi-2026/verification/user1.txt
+  349  + for file in "$work"/*.txt
+  350  + runuser -u user3 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user3 /data/mephi-2026/verification/user2.txt
+  351  + for file in "$work"/*.txt
+  352  + runuser -u user3 -- sh -c 'printf "%s\n" "$1" >> "$2"; cat "$2" >/dev/null' sh user3 /data/mephi-2026/verification/user3.txt
+  353  + for user in curator1 curator2
+  354  + for file in "$work"/*.txt
+  355  + runuser -u curator1 -- cat /data/mephi-2026/verification/user1.txt
+  356  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification/user1.txt
+  357  + for file in "$work"/*.txt
+  358  + runuser -u curator1 -- cat /data/mephi-2026/verification/user2.txt
+  359  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification/user2.txt
+  360  + for file in "$work"/*.txt
+  361  + runuser -u curator1 -- cat /data/mephi-2026/verification/user3.txt
+  362  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification/user3.txt
+  363  + runuser -u curator1 -- test '!' -w /data/mephi-2026/verification
+  364  + for user in curator1 curator2
+  365  + for file in "$work"/*.txt
+  366  + runuser -u curator2 -- cat /data/mephi-2026/verification/user1.txt
+  367  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification/user1.txt
+  368  + for file in "$work"/*.txt
+  369  + runuser -u curator2 -- cat /data/mephi-2026/verification/user2.txt
+  370  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification/user2.txt
+  371  + for file in "$work"/*.txt
+  372  + runuser -u curator2 -- cat /data/mephi-2026/verification/user3.txt
+  373  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification/user3.txt
+  374  + runuser -u curator2 -- test '!' -w /data/mephi-2026/verification
+  375  + runuser -u nobody -- test '!' -r /data/mephi-2026/verification
+  376  + runuser -u nobody -- test '!' -x /data/mephi-2026/verification
+  377  + getfacl -p /data/mephi-2026 /data/mephi-2026/verification /data/mephi-2026/verification/user1.txt
+  378  + rm -r /data/mephi-2026/verification
+  379  + capture=1067
+  380  + sleep 1
+  381  + timeout 12 runuser -u user1 -- tcpdump -i lo -nn -c 1 icmp
+  382  + ping -c 1 127.0.0.1
+  383  + wait 1067
+  384  + cat /root/tcpdump-user1.out
+  385  + python3 /root/verify-pam.py
+  386  + for user in root user1 user2 user3 curator1 curator2
+  387  ++ getent shadow root
+  388  ++ cut -d: -f5
+  389  + test 90 = 90
+  390  + for user in root user1 user2 user3 curator1 curator2
+  391  ++ getent shadow user1
+  392  ++ cut -d: -f5
+  393  + test 90 = 90
+  394  + for user in root user1 user2 user3 curator1 curator2
+  395  ++ cut -d: -f5
+  396  ++ getent shadow user2
+  397  + test 90 = 90
+  398  + for user in root user1 user2 user3 curator1 curator2
+  399  ++ getent shadow user3
+  400  ++ cut -d: -f5
+  401  + test 90 = 90
+  402  + for user in root user1 user2 user3 curator1 curator2
+  403  ++ getent shadow curator1
+  404  ++ cut -d: -f5
+  405  + test 90 = 90
+  406  + for user in root user1 user2 user3 curator1 curator2
+  407  ++ getent shadow curator2
+  408  ++ cut -d: -f5
+  409  + test 90 = 90
+  410  ++ nmcli -g GENERAL.CONNECTION device show ens18
+  411  + nmcli -f connection.id,ipv4.method connection show ens18
+  412  +++ nmcli -g GENERAL.CONNECTION device show ens18
+  413  ++ nmcli -g ipv4.method connection show ens18
+  414  + test auto = auto
+  415  + printf '%s\n' 'ALL CHECKS PASSED'
+  416  + artifacts=/root/mephi-results
+  417  + install -d -m 755 /root/mephi-results
+  418  + ping -c 4 8.8.8.8
+  419  + dnf history
+  420  + stat /data/mephi-2026
+  421  + stat /mephi-web
+  422  + getcap /usr/sbin/tcpdump
+  423  + journalctl -u nginx -b --no-pager
+  424  + getenforce
+  425  + curl -fsS http://localhost/
+  426  + cp /root/ping.out /root/dnf.out /root/stat.out /root/getcap.out /root/journalctl.out /root/getenforce.out /root/curl.out /root/mephi-results/
+  427  + cp /etc/fstab /etc/passwd /etc/group /etc/security/pwquality.conf /root/mephi-results/
+  428  + set +x
+  429  + cp /etc/nginx/nginx.conf /root/mephi-results/nginx.conf
+  430  + cp /etc/pam.d/login /root/mephi-results/login.pam
+  431  + cp /etc/security/mephi-console-denied /root/mephi-results/mephi-console-denied
+  432  + cp /etc/login.defs /root/mephi-results/login.defs
+  433  + cp /etc/selinux/config /root/mephi-results/selinux-config
+  434  + cp /etc/dracut.conf.d/50-mephi-virtio.conf /root/mephi-results/mephi-virtio.conf
+  435  + cp /root/fix-initramfs.sh /root/mephi-results/fix-initramfs.sh
+  436  + printf 'Before reboot: '
+  437  + cat /root/boot-id-before
+  438  + printf 'After reboot: '
+  439  + cat /proc/sys/kernel/random/boot_id
+  440  + uname -r
+  441  + uptime
+  442  + getfacl -p /data/mephi-2026
+  443  + findmnt /mephi-web
+  444  + semanage fcontext -l -C
+  445  ++ nmcli -g GENERAL.CONNECTION device show ens18
+  446  + nmcli -f connection.id,ipv4.method connection show ens18
+  447  + ip -brief address
+  448  + ip route
+  449  + rpm -qi tcpdump
+  450  + cp /root/tcpdump-user1.out /root/verification.out /root/verification-after-reboot.out /root/mephi-results/
+  451  + cat /etc/os-release
+  452  + rpm -qa 'redos-release*'
+  453  + systemctl get-default
+  454  + cp /root/configure.sh /root/verify.sh /root/verify-pam.py /root/collect.sh /root/mephi-results/
+  455  + set +x
